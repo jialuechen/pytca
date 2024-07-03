@@ -1,0 +1,7 @@
+recursive-include pytca/ *.*
+include pytca/conf/*
+recursive-include pytca_examples/ *.*
+recursive-include pytcagen/ *.*
+recursive-include pytcauser/ *.*
+
+global-exclude *.py[cod] __pycache__ *.so *.pdf *.env

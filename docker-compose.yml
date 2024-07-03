@@ -1,0 +1,144 @@
+version: '3.6'
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 9500:9500
+      - 80:80
+    volumes:
+      - ./pytca:/pytca
+      - ./pytca/conf/pytca_nginx_gunicorn_docker.conf:/etc/nginx/conf.d/default.conf
+      - ./log:/var/log/nginx
+    depends_on:
+      - gunicorn_pytca
+      - gunicorn_pytcaboard
+
+  jupyter:
+    build:
+      context: .
+      dockerfile: binder/Dockerfile
+      target: builder
+    environment:
+      - APP_ENV=docker
+    env_file: .pytca.env
+    ports:
+      - 8888:8888
+    depends_on:
+      - redis
+      - celery
+    volumes:
+      - /tmp/csv:/tmp/csv
+      - /tmp/pytca:/tmp/pytca
+      - /data/csv_dump:/data/csv_dump
+      - ./pytca_notebooks:/home/jovyan/pytca_notebooks
+      - ./pytca_scripts:/home/jovyan/pytca_scripts
+
+  gunicorn_pytca:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    command: "gunicorn --bind 0.0.0.0:8090 --workers 4 --threads 6 --preload --chdir /pytca/pytca/conf \
+        --access-logfile /pytca/log/gunicorn_pytca_access.log \
+        --error-logfile /pytca/log/gunicorn_pytca_error.log pytca_wsgi:application & "
+    volumes:
+      - ./log:/pytca/log
+      - /tmp/csv:/tmp/csv
+      - /tmp/pytca:/tmp/pytca
+      - /data/csv_dump:/data/csv_dump
+    env_file: .pytca.env
+    environment:
+      - APP_ENV=docker
+      - pytca_CUEMACRO=/pytca
+    depends_on:
+      - redis
+      - mongo
+      - mysql
+      - memcached
+      - celery
+    ports:
+      - 8090:8090
+
+  gunicorn_pytcaboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    command: "gunicorn --bind 0.0.0.0:8092 --workers 4 --threads 6 --preload --chdir /pytca/pytca/conf \
+        --access-logfile /pytca/log/gunicorn_pytca_access.log \
+        --error-logfile /pytca/log/gunicorn_pytca_error.log pytcaboard_wsgi:application & "
+    volumes:
+      - ./log:/pytca/log
+      - /tmp/csv:/tmp/csv
+      - /tmp/pytca:/tmp/pytca
+      - /data/csv_dump:/data/csv_dump
+    env_file: .pytca.env
+    environment:
+      - APP_ENV=docker
+      - pytca_CUEMACRO=/pytca
+    depends_on:
+      - redis
+      - mongo
+      - mysql
+      - memcached
+      - celery
+    ports:
+      - 8092:8092
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    working_dir: /pytca
+    command: "celery -A pytca.conf.celery_calls worker --purge --discard --loglevel=debug -Q celery --concurrency=14 -f log/celery.log"
+    volumes:
+      - ./log:/pytca/log
+      - /tmp/csv:/tmp/csv
+      - /tmp/pytca:/tmp/pytca
+      - /data/csv_dump:/data/csv_dump
+    env_file: .pytca.env
+    environment:
+      - APP_ENV=docker
+      - C_FORCE_ROOT=true
+    depends_on:
+      - redis
+      - mongo
+      - mysql
+      - memcached
+
+  redis:
+    image: "redis:alpine"
+    command: redis-server --port 6379 --save ""
+    ports:
+      - 6379:6379
+
+  memcached:
+    image: memcached
+    ports:
+      - 11211:11211
+
+  mongo:
+    image: mongo:latest
+    env_file: .pytca.env
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/db_mongodb:/data/db
+      - ./log:/var/log/mongodb
+
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - /data/db_mysql:/var/lib/mysql
+    env_file: .pytca.env
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
