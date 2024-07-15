@@ -2,7 +2,7 @@
 <img src="assets/pytca-logo.png" width="40%" loc>
 </div>
 
-# pytca: Python Transaction Cost Analysis
+# pytca: Python Library for Transaction Cost Analysis
 
 [![PyPI version](https://badge.fury.io/py/pytca.svg)](https://badge.fury.io/py/pytca)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pytca.svg)](https://pypi.org/project/pytca/)
