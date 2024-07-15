@@ -6,7 +6,6 @@
 
 [![PyPI version](https://badge.fury.io/py/pytca.svg)](https://badge.fury.io/py/pytca)
 [![Python Versions](https://img.shields.io/pypi/pyversions/pytca.svg)](https://pypi.org/project/pytca/)
-
 [![Documentation Status](https://readthedocs.org/projects/pytca/badge/?version=latest)](https://pytca.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![Coverage Status](https://coveralls.io/repos/github/jialuechen/pytca/badge.svg?branch=main)](https://coveralls.io/github/jialuechen/pytca?branch=main)
