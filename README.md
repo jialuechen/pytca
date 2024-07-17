@@ -51,7 +51,7 @@ fig = pytca.plot_tick_data(tick_data, plot_type='summary')
 fig.write_html('tick_data_summary.html')
 ```
 
-## Examples
+## More Examples
 
 ### Loading Data from Different Sources
 
