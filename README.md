@@ -11,6 +11,7 @@
 
 ![PyPI - Version](https://img.shields.io/pypi/v/pitch)
 [![Python Versions](https://img.shields.io/badge/python-3.12%2B-green)](https://pypi.org/project/pytca/)
+![PyPI downloads](https://img.shields.io/pypi/dm/pytca)
 [![Documentation Status](https://readthedocs.org/projects/pytca/badge/?version=latest)](https://pytca.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![Coverage Status](https://coveralls.io/repos/github/jialuechen/pytca/badge.svg?branch=main)](https://coveralls.io/github/jialuechen/pytca?branch=main)
