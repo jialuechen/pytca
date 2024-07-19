@@ -4,7 +4,7 @@
 
 <div align=center>
 
-# pytca: Python Library for Transaction Cost Analysis
+# PyTCA: Python Library for Transaction Cost Analysis
 
 </div>
 <div align=center>
@@ -18,7 +18,7 @@
 
 </div>
 
-pytca is a Python package for transaction cost analysis in financial markets, supporting both stock and forex data at the tick level.
+PyTCA is a Python package for transaction cost analysis in financial markets, supporting both stock and forex data at the tick level.
 
 ## Features
 
