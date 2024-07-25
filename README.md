@@ -9,7 +9,7 @@
 </div>
 <div align=center>
 
-![PyPI - Version](https://img.shields.io/pypi/v/pitch)
+[![PyPI - Version](https://img.shields.io/pypi/v/pytca)](https://pypi.org/project/pytca/)
 [![Python Versions](https://img.shields.io/badge/python-3.12%2B-green)](https://pypi.org/project/pytca/)
 ![PyPI downloads](https://img.shields.io/pypi/dm/pytca)
 [![Documentation Status](https://readthedocs.org/projects/pytca/badge/?version=latest)](https://pytca.readthedocs.io/en/latest/?badge=latest)
