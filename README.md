@@ -10,7 +10,7 @@
 <div align=center>
 
 [![PyPI - Version](https://img.shields.io/pypi/v/pytca)](https://pypi.org/project/pytca/)
-[![Python Versions](https://img.shields.io/badge/python-3.12%2B-green)](https://pypi.org/project/pytca/)
+[![Python Versions](https://img.shields.io/badge/python-3.6%2B-green)](https://pypi.org/project/pytca/)
 ![PyPI downloads](https://img.shields.io/pypi/dm/pytca)
 [![Documentation Status](https://readthedocs.org/projects/pytca/badge/?version=latest)](https://pytca.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
