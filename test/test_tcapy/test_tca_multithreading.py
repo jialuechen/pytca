@@ -10,10 +10,10 @@ the usefulness of the stress test.
 
 from __future__ import division, print_function
 
-__author__ = 'Jialue Chen'  # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen'  # Saeed Amen / saeed@.com
 
 #
-# Copyright 2017 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro
+# Copyright 2017  Ltd. - http//www..com / @
 #
 # See the License for the specific language governing permissions and limitations under the License.
 #

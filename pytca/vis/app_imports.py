@@ -5,14 +5,14 @@ class to render the layout and SessionManager to keep track of each user session
 """
 from __future__ import division, print_function
 
-__author__ = 'Jialue Chen' # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen' # Saeed Amen / saeed@.com
 
 #
-# Copyright 2019 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro
+# Copyright 2019  Ltd. - http//www..com / @
 #
 # See the License for the specific language governing permissions and limitations under the License.
 #
-# This may not be distributed without the permission of Cuemacro.
+# This may not be distributed without the permission of .
 #
 
 import os
@@ -20,10 +20,10 @@ import sys
 
 # for LINUX machines
 try:
-    pytca_cuemacro = os.environ['pytca_CUEMACRO']
-    sys.path.insert(0, pytca_cuemacro + '/pytca/')
+    pytca_ = os.environ['pytca_']
+    sys.path.insert(0, pytca_ + '/pytca/')
 except:
-    print('Did not set path! Check if pytca_CUEMACRO environment variable is set?')
+    print('Did not set path! Check if pytca_ environment variable is set?')
 
 # it is recommended to set your Python environment before running app.py!
 

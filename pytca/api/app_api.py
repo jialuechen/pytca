@@ -1,9 +1,9 @@
 from __future__ import division, print_function
 
-__author__ = 'Jialue Chen' # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen' # Saeed Amen / saeed@.com
 
 #
-# Copyright 2019 Cuemacro
+# Copyright 2019 
 #
 # See the License for the specific language governing permissions and limitations under the License.
 #

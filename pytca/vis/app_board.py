@@ -7,10 +7,10 @@ class to render the layout and SessionManager to keep track of each user session
 """
 from __future__ import division, print_function
 
-__author__ = 'Jialue Chen' # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen' # Saeed Amen / saeed@.com
 
 #
-# Copyright 2019 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro
+# Copyright 2019  Ltd. - http//www..com / @
 #
 # See the License for the specific language governing permissions and limitations under the License.
 #

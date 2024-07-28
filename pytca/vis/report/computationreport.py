@@ -1,9 +1,9 @@
 from __future__ import print_function
 
-__author__ = 'Jialue Chen'  # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen'  # Saeed Amen / saeed@.com
 
 #
-# Copyright 2018 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro
+# Copyright 2018  Ltd. - http//www..com / @
 #
 # See the License for the specific language governing permissions and limitations under the License.
 #
@@ -18,7 +18,7 @@ import pdfkit
 try:
     from weasyprint import HTML, CSS
 except Exception as e:
-    print("You may need to check that you've installed WeasyPrint - check instructions at https://github.com/cuemacro/pytca/blob/master/INSTALL.md")
+    print("You may need to check that you've installed WeasyPrint - check instructions at https://github.com//pytca/blob/master/INSTALL.md")
     print(str(e))
 
 from jinja2 import Environment, FileSystemLoader
@@ -288,7 +288,7 @@ class ComputationReport(ABC):
 
     """
 
-    def __init__(self, computation_results, title='Cuemacro Computation', renderer=CanvasRenderer(),
+    def __init__(self, computation_results, title=' Computation', renderer=CanvasRenderer(),
                  chart_report_height=constants.chart_report_height, chart_report_width=constants.chart_report_width):
         """Initialize class, with the computation results we wish to convert into a report like format
 

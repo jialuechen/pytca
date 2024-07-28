@@ -1,7 +1,7 @@
-__author__ = 'Jialue Chen'  # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen'  # Saeed Amen / saeed@.com
 
 #
-# Copyright 2017 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro
+# Copyright 2017  Ltd. - http//www..com / @
 #
 # See the License for the specific language governing permissions and limitations under the License.
 #
@@ -108,9 +108,9 @@ class DataNorm(object):
 
         # For each dataset have a different field mapping (get field mapping for that dataset from stored CSV files)
 
-        # Convert vendor specific field names to the Cuemacro names
+        # Convert vendor specific field names to the  names
 
-        # Convert vendor specific asset names (eg. GBP=) to Cuemacro standard names (GBPUSD)
+        # Convert vendor specific asset names (eg. GBP=) to  standard names (GBPUSD)
 
         # The dataset is very dense, we assume it is stored on disk ordered (Arctic only allows this)
         # df = df.sort_index()

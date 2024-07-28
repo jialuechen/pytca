@@ -7,21 +7,21 @@ import os
 import sys
 
 try:
-    pytca_cuemacro = os.environ['pytca_CUEMACRO']
+    pytca_ = os.environ['pytca_']
     python_home = os.environ['pytca_PYTHON_ENV']
 except:
     user_home = os.environ['USER']
 
-    # if pytca_CUEMACRO not set globally (or the Python environment for pytca), we need to specify it here
-    pytca_cuemacro = '/home/' + user_home + '/cuemacro/'
+    # if pytca_ not set globally (or the Python environment for pytca), we need to specify it here
+    pytca_ = '/home/' + user_home + '//'
     python_home = '/home/' + user_home + '/py36tca/'
 
 activate_this = python_home + '/bin/activate_this.py'
 
 execfile(activate_this, dict(__file__=activate_this))
 
-sys.path.insert(0, pytca_cuemacro + '/pytca/')
-# os.chdir(pytca_cuemacro+ '/pytca/pytca/vis/')
+sys.path.insert(0, pytca_ + '/pytca/')
+# os.chdir(pytca_+ '/pytca/pytca/vis/')
 
 from pytca.vis.app_board import server as application
-application.root_path = pytca_cuemacro + '/pytca/pytca/vis/'
+application.root_path = pytca_ + '/pytca/pytca/vis/'
