@@ -1,10 +1,9 @@
-from setuptools import setup, Extension,find_packages
+from setuptools import setup,find_packages
 from setuptools.command.build_ext import build_ext
-
 
 setup(
     name='pytca',
-    version='1.1.0',
+    version='1.2.0',
     description='Python Library for Transaction Cost Analysis',
     author='Jialue Chen',
     author_email='jialuechen@outlook.com',
