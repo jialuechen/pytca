@@ -1,4 +1,4 @@
-setuptools-git
+setuptools-git--versioning
 cython
 arctic
 sqlalchemy
