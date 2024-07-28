@@ -6,7 +6,7 @@ import pybind11
 setup(
     name='pytca',
     version='1.1.0',
-    description='Advanced Python Library for Transaction Cost Analysis',
+    description='Python Library for Transaction Cost Analysis',
     author='Jialue Chen',
     author_email='jialuechen@outlook.com',
     url='https://github.com/jialuechen/pytca',
