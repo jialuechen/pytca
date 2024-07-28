@@ -18,7 +18,7 @@ setup(
     author='Jialue Chen',
     author_email='jialuechen@outlook.com',
     url='https://github.com/jialuechen/pytca',
-    packages=['pytca', 'pytca.data', 'pytca.analysis', 'pytca.visualization', 'pytca.api', 'pytca.ml', 'pytca.portfolio', 'pytca.crypto', 'pytca.risk'],
+    packages=['pytca', 'pytca.data', 'pytca.analysis', 'pytca.visualization', 'pytca.ml', 'pytca.portfolio', 'pytca.crypto', 'pytca.risk'],
     install_requires=[
         'pandas', 'matplotlib', 'plotly', 'bokeh', 'dash', 'flask', 'pybind11', 'numpy', 'geopandas', 'sklearn', 'textblob', 'requests', 'web3'
     ],
