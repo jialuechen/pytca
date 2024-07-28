@@ -1,4 +1,4 @@
-from setuptools import setup, Extension
+from setuptools import setup, Extension,find_packages
 from setuptools.command.build_ext import build_ext
 import pybind11
 
@@ -18,7 +18,7 @@ setup(
     author='Jialue Chen',
     author_email='jialuechen@outlook.com',
     url='https://github.com/jialuechen/pytca',
-    packages=['pytca', 'pytca.data', 'pytca.analysis', 'pytca.visualization', 'pytca.ml', 'pytca.portfolio', 'pytca.crypto', 'pytca.risk'],
+    packages=find_packages(),
     install_requires=[
         'pandas', 'matplotlib', 'plotly', 'bokeh', 'dash', 'flask', 'pybind11', 'numpy', 'geopandas', 'sklearn', 'textblob', 'requests', 'web3'
     ],
