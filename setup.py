@@ -3,7 +3,7 @@ from setuptools.command.build_ext import build_ext
 
 setup(
     name='pytca',
-    version='1.2.0',
+    version='1.2.1',
     description='Python Library for Transaction Cost Analysis',
     author='Jialue Chen',
     author_email='jialuechen@outlook.com',
