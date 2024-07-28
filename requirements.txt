@@ -1,64 +1,41 @@
-setuptools-git--versioning
-cython
-arctic
-sqlalchemy
-redis
+# Core libraries
 numpy
-scipy
-statsmodels
-blosc
-pyarrow
-pathos
-multiprocess
-fastparquet
-flask-restplus
-gunicorn
-beautifulsoup4
-pdfkit
-psutil
-matplotlib
-boto3
+pandas
+
+# Financial data analysis
 pyodbc
-pytest
-pytest-cov
-mysql-connector-python
-IPython
-chartpy
-findatapy
-dash-auth
-cufflinks
+sqlalchemy
+cx_Oracle
+psycopg2-binary
+arctic
+web3
+
+# Plotting and visualization
+matplotlib
 plotly
-kaleido
-eikon
-chart-studio
+bokeh
 dash
 dash-bootstrap-components
-dash-html-components
-dash-core-components
-dash-table
-jupyter-dash
-dtale
-qpython
-influxdb
-celery
-pytest-tap
-kombu
-python-memcached
-numba
-vispy
-jinja2
-jupyterlab
-jupyter_contrib_nbextensions
-jupyter_nbextensions_configurator
-RISE
-bqplot
-WeasyPrint
-dask
-distributed
-cloudpickle
-python-snappy
-bokeh
-msgpack
-pystore
-fsspec
 
+# Geospatial analysis
+geopandas
+
+# Machine learning
+scikit-learn
+
+# Sentiment analysis
+textblob
+
+# API and web services
+flask
+requests
+
+# C++ integration
+pybind11
+
+# Testing
+pytest
+pytest-cov
+
+# Additional dependencies
+inflect

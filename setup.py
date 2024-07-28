@@ -1,33 +1,28 @@
-from setuptools import setup, find_packages
+from setuptools import setup, Extension
+from setuptools.command.build_ext import build_ext
+import pybind11
 
-from pytca import __version__ as version
+ext_modules = [
+    Extension(
+        'pytca_cpp',
+        ['pytca/cpp/pybind_module.cpp'],
+        include_dirs=[pybind11.get_include()],
+        language='c++',
+    ),
+]
 
-full_description = """pytca is a Python library for doing transaction cost analysis (TCA), essentially finding the cost of your trading activity.
-Across the industry many financial firms and corporates trading within financial markets spend a lot of money on TCA, either
-by developing in house tools or using external services.Many sell side firms and larger buy side firms build and maintain their own TCA libraries, which is very expensive. The cost of TCA
-across the industry is likely to run into many hundreds of millions of dollars or possibly billions of dollars.
+setup(
+    name='pytca',
+    version='1.1.0',
+    description='Advanced Python Library for Transaction Cost Analysis',
+    author='Jialue Chen',
+    author_email='jialuechen@outlook.com',
+    url='https://github.com/jialuechen/pytca',
+    packages=['pytca', 'pytca.data', 'pytca.analysis', 'pytca.visualization', 'pytca.api', 'pytca.ml', 'pytca.portfolio', 'pytca.crypto', 'pytca.risk'],
+    install_requires=[
+        'pandas', 'matplotlib', 'plotly', 'bokeh', 'dash', 'flask', 'pybind11', 'numpy', 'geopandas', 'sklearn', 'textblob', 'requests', 'web3'
+    ],
+    ext_modules=ext_modules,
+    cmdclass={'build_ext': build_ext},
+)
 
-Much of the complexity in TCA is due to the need to handle large tick datasets and do calculations on them and is largely a
-software engineering problem. This work needs to be repeated in every single implementation. By open sourcing the library
-we hope that the industry will no longer need to keep reinventing the wheel when it comes to TCA. At the same time,
-because all the code is visible to users, pytca allows you can add your own customized metrics and benchmarks,
-which is where you are likely have very particular IP in financial markets. You get the flexibility of a fully internal
-TCA solution for free.
-"""
-
-with open('requirements.txt') as f:
-    install_requires = f.read()
-
-setup(name='pytca',
-      version=version,
-      description='Tranasction cost analysis library',
-      author='Jialue Chen',
-      author_email='jialuechen@outlook.com',
-      license='BSD',
-      long_description=full_description,
-      keywords=['TCA', 'transaction cost analysis'],
-      url='https://github.com/jialuechen/pytca',
-      packages=find_packages(include=["pytca*"]),
-      include_package_data=True,
-      install_requires=install_requires,
-      zip_safe=False)
