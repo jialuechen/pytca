@@ -3,7 +3,7 @@
 """
 from __future__ import absolute_import, print_function, division
 
-__author__ = 'saeedamen'  # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen'  # Saeed Amen / saeed@cuemacro.com
 
 #
 # Copyright 2018 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro

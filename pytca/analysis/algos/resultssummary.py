@@ -1,12 +1,7 @@
 from __future__ import print_function, division
 
-__author__ = 'saeedamen'  # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen'  
 
-#
-# Copyright 2017 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro
-#
-# See the License for the specific language governing permissions and limitations under the License.
-#
 
 import numpy as np
 import pandas as pd

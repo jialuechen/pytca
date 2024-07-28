@@ -5,7 +5,7 @@ and then read - so that can be used instead, if your production market and trade
 This will also involve setting your database IP, username, password etc.
 """
 
-__author__ = 'saeedamen'  # Saeed Amen / saeed@cuemacro.com
+__author__ = 'Jialue Chen'  # Saeed Amen / saeed@cuemacro.com
 
 #
 # Copyright 2017 Cuemacro Ltd. - http//www.cuemacro.com / @cuemacro

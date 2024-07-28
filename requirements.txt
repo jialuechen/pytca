@@ -3,7 +3,6 @@ cython
 arctic
 sqlalchemy
 redis
-pandas
 numpy
 scipy
 statsmodels
