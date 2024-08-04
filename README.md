@@ -7,6 +7,7 @@
 # PyTCA: Python Library for Transaction Cost Analysis
 
 </div>
+
 <div align=center>
 
 [![PyPI - Version](https://img.shields.io/pypi/v/pytca)](https://pypi.org/project/pytca/)
@@ -22,12 +23,11 @@ PyTCA is a Python package for transaction cost analysis in financial markets, su
 
 ## Features
 
-- Load and process tick-level data for stocks and forex
-- Perform various analyses including slippage, market impact, and timing cost
-- Calculate key metrics such as VWAP and implementation shortfall
+- Support tick-level data processing and analytics for stocks and forex
+- Perform various analyses including slippage, market impact, and timing cost and Calculate key metrics such as VWAP and implementation shortfall
 - Generate visualizations and reports
-- RESTful API for integration with other systems
-- Support for Excel and KDB data sources
+- Enable RESTful API for integration with other systems
+- Support for Excel and KDB+ as well as well as other RDBMS data sources
 
 ## Installation
 
