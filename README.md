@@ -19,7 +19,7 @@
 
 </div>
 
-PyTCA is a Python package for transaction cost analysis in financial markets, supporting both stock and forex data at the tick level.
+**PyTCA** is a Python package for transaction cost analysis in financial markets, supporting both stock and forex data at the tick level.
 
 ## Features
 
