@@ -32,7 +32,7 @@ PyTCA is a Python package for transaction cost analysis in financial markets, su
 ## Installation
 
 ```bash
-pip install pytca
+pip install -U pytca
 ```
 
 ## Quick Start
