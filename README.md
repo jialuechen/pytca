@@ -4,7 +4,7 @@
 
 <div align=center>
 
-# PyTCA: Python Library for Transaction Cost Analysis
+# PyTCA: Python Library for Comprehensive Transaction Cost Analysis (TCA)
 
 </div>
 
