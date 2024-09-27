@@ -11,9 +11,9 @@
 <div align=center>
 
 [![PyPI - Version](https://img.shields.io/pypi/v/pytca)](https://pypi.org/project/pytca/)
+[![Git](https://img.shields.io/github/release/jialuechen/pytca.svg)](https://github.com/jialuechen/pytca/releases) 
 [![Python Versions](https://img.shields.io/badge/python-3.6%2B-green)](https://pypi.org/project/pytca/)
 ![PyPI downloads](https://img.shields.io/pypi/dm/pytca)
-[![Git](https://img.shields.io/github/release/jialuechen/pytca.svg)](https://github.com/jialuechen/pytca/releases) 
 [![Documentation Status](https://readthedocs.org/projects/pytca/badge/?version=latest)](https://pytca.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
 [![Coverage Status](https://coveralls.io/repos/github/jialuechen/pytca/badge.svg?branch=main)](https://coveralls.io/github/jialuechen/pytca?branch=main)
