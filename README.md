@@ -138,9 +138,8 @@ pytca.run_api(host='localhost', port=5000)
 # with JSON body: {"table_name": "tickdata", "start_time": "2023.07.15T09:30:00.000", "end_time": "2023.07.15T16:00:00.000", "symbols": ["AAPL", "GOOGL"]}
 ```
 
-## Documentation
-
-For full documentation, please visit [Read the Docs](https://pytca.readthedocs.io/).
+## Roadmap
+Q4 2024: Implement an order flow simulator which can generate large-scale alpha-less orders,i.e., unbiased trades from randomized interventional experiments.
 
 ## Contributing
 

@@ -39,3 +39,4 @@ pytest-cov
 
 # Additional dependencies
 inflect
+jax
