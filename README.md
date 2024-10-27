@@ -1,5 +1,5 @@
 <div align=center>
-<img src="assets/img/pytca-logo.png" width="40%" loc>
+<img src="assets/pytca-logo.png" width="40%" loc>
 </div>
 
 <div align=center>
