@@ -1,6 +1,7 @@
 # Core libraries
 numpy
 pandas
+ollama
 
 # Financial data analysis
 pyodbc

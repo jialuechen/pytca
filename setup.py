@@ -10,7 +10,7 @@ setup(
     url='https://github.com/jialuechen/pytca',
     packages=find_packages(),
     install_requires=[
-        'pandas', 'matplotlib', 'plotly', 'bokeh', 'dash', 'flask', 'pybind11', 'numpy', 'geopandas', 'scikit-learn', 'textblob', 'requests','jax', 'web3'
+        'ollama','pandas', 'matplotlib', 'plotly', 'bokeh', 'dash', 'flask', 'pybind11', 'numpy', 'geopandas', 'scikit-learn', 'textblob', 'requests','jax', 'web3'
     ],
     cmdclass={'build_ext': build_ext},
 )
