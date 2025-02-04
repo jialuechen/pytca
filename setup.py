@@ -4,7 +4,7 @@ from pytca import __version__ as versionInfo
 setup(
     name='pytca',
     version=versionInfo,
-    description='Python Library for Transaction Cost Analysis',
+    description='Python Library for Transaction Cost Analysis and Market Simulation',
     author='Jialue Chen',
     author_email='jialuechen@outlook.com',
     url='https://github.com/jialuechen/pytca',
