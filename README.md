@@ -1,162 +1,110 @@
-<div align=center>
+# FlowForge
 
-# FlowPylib: Python Library for Order Flow Inference and Transaction Cost Analytics
+Python package pairing two engines for metaorder research: a **generation
+engine** that forward-simulates institutional order flow via mean-variance
+optimization on tunable alpha signals,
+producing millions of labeled orders switchable between informed and
+uninformed flow for execution algo testing and causal A/B experiments at
+zero trading cost; and an **impact engine** that reconstructs realistic
+metaorders from public trade data via randomized trader mapping, recovering
+proprietary-grade stylized facts (Square Root Law, concave execution
+profiles, impact decay) and removing the proprietary-data barrier to
+impact research.
 
-</div>
+## Install
 
-<div align=center>
-
-[![PyPI - Version](https://img.shields.io/pypi/v/pytca)](https://pypi.org/project/flowpylib/)
-[![Python Versions](https://img.shields.io/badge/python-3.6%2B-green)](https://pypi.org/project/flowpylib/)
-[![PyPI Downloads](https://static.pepy.tech/badge/flowpylib)](https://pepy.tech/projects/flowpylib)
-[![License](https://img.shields.io/badge/License-BSD%202--Clause-orange.svg)](https://opensource.org/licenses/BSD-2-Clause)
-
-</div>
-
-**FlowPylib** is a Python package for transaction cost analysis in financial markets, supporting both stock and forex data at the tick level. The library assists traders and market makers by enabling detailed analysis of market data, reconstruction of metaorders, and simulation of order flows. It also provides various visualization tools and a RESTful API to integrate the analytics into your systems.
-
-## Features
-
-- **Tick Data Processing:**  
-  Process high-frequency tick data for stocks and forex.
-
-- **MetaOrder Reconstruction:**  
-  Reconstruct realistic metaorders using public tick data as ground truth, enabling offline pre-trade cost estimation and execution optimization.
-
-- **Bayesian Change-Point Detection:**  
-  Detect regime shifts in order flow to help market makers adjust quoting skew and manage inventory exposure in real time.
-
-- **Buy-Side Order Flow Simulation:**  
-  Simulate buy-side order flow to estimate the number of trades required to detect directional alpha in client order flow.
-
-- **Rich Visualizations & Reporting:**  
-  Generate interactive charts and dashboards, including candlestick charts, trade flow visualizations, and summary dashboards.
-
-- **RESTful API Integration:**  
-  Run an API server to provide analysis as a service, making it easy to integrate with other systems.
-
-- **Multi-Source Data Loading:**  
-  Supports CSV, Excel, SQL, KDB+, and other RDBMS data sources.
-
-## Installation and Quick Start
 ```bash
-pip install -U flowpylib
+pip install -e .
 ```
+
+Dependencies: numpy, pandas, scipy.
+
+## Engine 1 — order flow generation (`flowforge.generate`)
+
+Each period a bootstrap alpha vector `alpha = rho * r + sqrt(1-rho^2) * z`
+(information coefficient ≈ `rho` by construction) feeds a mean-variance
+problem with quadratic transaction costs. The closed-form solution is a
+Garleanu-Pedersen partial adjustment toward the Markowitz target, so
+order splitting and sign autocorrelation emerge endogenously. Setting
+`rho=0` flips the same machinery to uninformed (randomized) flow — the
+switch used for interventional data in causal A/B testing of impact models.
 
 ```python
-import flowpylib
+from flowforge import OrderFlowSimulator, SimulationConfig
 
-# Load tick data (supports stocks, forex, etc.)
-tick_data = flowpylib.load_tick_data('path/to/tick_data.csv', data_type='stock')
-
-# Analyze the tick data
-analysis_results = flowpylib.analyze_tick_data(tick_data)
-print("Tick Data Analysis Results:", analysis_results)
-
-# Visualize tick data with a summary dashboard
-summary_fig = flowpylib.plot_tick_data(tick_data, plot_type='summary')
-summary_fig.write_html('summary_dashboard.html')
+sim = OrderFlowSimulator(SimulationConfig(
+    n_assets=100, n_periods=750,
+    rho=0.05,             # information coefficient; 0 = uninformed flow
+    alpha_half_life=5.0,  # signal persistence, periods
+    risk_aversion=5.0,
+    tcost=5e-3,           # quadratic transaction cost -> trading rate
+    seed=7,
+))
+orders = sim.run()        # long-format tape: period, asset, notional, sign,
+                          # participation, adv, market_cap, informed, ...
+print(sim.realized_ic(orders))
 ```
 
-## More Examples
-
-### Loading Data from Different Sources
+Flow diagnostics:
 
 ```python
-import flowpylib
+from flowforge import sign_autocorrelation, participation_stats
 
-# From CSV
-csv_data = flowpylib.load_tick_data('path/to/tick_data.csv', data_type='stock')
-
-# From Excel
-excel_data = flowpylib.read_excel('path/to/tick_data.xlsx', sheet_name='Tick Data')
-
-# Using KDBHandler for KDB+ source
-kdb_handler = flowpylib.KDBHandler(host='localhost', port=5000)
-kdb_data = kdb_handler.load_tick_data('tickdata', '2023.07.15T09:30:00.000', '2023.07.15T16:00:00.000')
+sign_autocorrelation(orders, max_lag=10)   # order-splitting persistence
+participation_stats(orders)                # size/participation/cap relations
 ```
 
-### Performing Analysis
+## Engine 2 — metaorder reconstruction (`flowforge.reconstruct`)
+
+Takes any public tape (`timestamp, price, size, sign`, plus a session
+column), randomly assigns trades to `n_traders` synthetic traders drawn
+from a homogeneous or power-law frequency distribution (the mapping's only
+two degrees of freedom), and defines a metaorder as a same-trader,
+same-sign run of trades. Impact is measured from the trade before the
+first child to the trade after the last child, normalized by daily
+volatility and volume.
 
 ```python
-import flowpylib
+from flowforge import build_metaorders, MappingConfig, synthetic_tape
 
-# Load data for stocks and forex
-stock_data = flowpylib.load_tick_data('path/to/stock_data.csv', data_type='stock')
-forex_data = flowpylib.load_tick_data('path/to/forex_data.csv', data_type='forex')
+tape = synthetic_tape(n_sessions=40, trades_per_session=3000, seed=11)
+# or your own data: DataFrame with date, timestamp, price, size, sign
 
-# Analyze stock data
-stock_analysis = flowpylib.analyze_stock_trade(stock_data, benchmark_data)
-print("Stock Analysis Results:", stock_analysis)
-
-# Analyze forex data
-forex_analysis = flowpylib.analyze_forex_trade(forex_data, benchmark_data)
-print("Forex Analysis Results:", forex_analysis)
-
-# Calculate slippage and VWAP as examples
-slippage = flowpylib.calculate_slippage(executed_price=100.05, benchmark_price=100.00)
-print("Slippage:", slippage)
-
-vwap = flowpylib.calculate_vwap(prices=[100.00, 100.05, 100.10], volumes=[1000, 2000, 1500])
-print("VWAP:", vwap)
+meta, children = build_metaorders(
+    tape, MappingConfig(n_traders=20, freq_dist="homogeneous"), seed=11
+)
 ```
 
-### Generating Visualizations
+Impact diagnostics:
 
 ```python
-import flowpylib
+from flowforge import square_root_law, execution_profile, impact_decay
 
-# Load tick data
-tick_data = flowpylib.load_tick_data('path/to/tick_data.csv', data_type='stock')
-
-# Create a basic plot
-basic_fig = flowpylib.plot_tick_data(tick_data, plot_type='basic')
-basic_fig.savefig('basic_plot.png')
-
-# Create a candlestick chart
-candlestick_fig = flowpylib.plot_tick_data(tick_data, plot_type='candlestick', interval='5min')
-candlestick_fig.write_html('candlestick.html')
-
-# Create an order book depth chart
-depth_fig = flowpylib.plot_tick_data(tick_data, plot_type='depth')
-depth_fig.write_html('depth_chart.html')
-
-# Create a trade flow chart
-trade_flow_fig = flowpylib.plot_tick_data(tick_data, plot_type='trade_flow', window='5min')
-trade_flow_fig.write_html('trade_flow.html')
-
-# Create a summary dashboard
-summary_fig = flowpylib.plot_tick_data(tick_data, plot_type='summary')
-summary_fig.write_html('summary_dashboard.html')
+sql = square_root_law(meta)          # fits I/sigma = Y * (Q/V)^gamma
+profile = execution_profile(children)  # vs sqrt(phi) concave benchmark
+decay = impact_decay(meta, tape)     # rescaled impact at z = 1 + dt/T
 ```
 
-### Using the RESTful API
+Benchmarks from the literature: exponent ≈ 0.5 with prefactor
+Y ∈ [0.5, 1]; concave `sqrt(phi)` in-execution profile; impact decaying
+after execution on the timescale of the metaorder itself.
 
-```python
-import flowpylib
+## Quickstart
 
-# Start the API server
-flowpylib.run_api(host='localhost', port=5000)
-
-# Now you can make HTTP requests to the API endpoints, for example:
-# POST http://localhost:5000/analyze_tick_data
-# with JSON body: {"table_name": "tickdata", "start_time": "2023.07.15T09:30:00.000", "end_time": "2023.07.15T16:00:00.000", "symbols": ["AAPL", "GOOGL"]}
+```bash
+python examples/quickstart.py
+python -m pytest tests/
 ```
 
-## Roadmap
+## Package layout
 
-- **Q3 2025:**  
-  - Expand API capabilities to support advanced query parameters and data aggregation functions.  
-  - Add a comprehensive backtesting framework for systematic strategy simulations and scenario analysis.
+```
+flowforge/
+├── generate/       Kolm-Westray engine: alpha.py, mvo.py, market.py, simulator.py
+├── reconstruct/    Maitrier-Bouchaud engine: mapping.py, metaorders.py, tape.py
+└── diagnostics/    shared stylized-fact tests: impact.py, flow.py
+```
 
-- **Q4 2025:**  
-  - Optimize performance and scalability for handling high-frequency tick data.  
-  - Incorporate advanced risk management tools focusing on inventory and market exposure mitigation.
+## Disclaimer
 
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
-
-## License
-
-This project is licensed under the BSD-2-Clause License - see the [LICENSE](LICENSE) file for details.
+Research software for simulation and diagnostics; not investment advice.

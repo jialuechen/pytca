@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "flowforge"
+version = "0.1.0"
+description = "Metaorder simulation and market impact research: MVO-based order flow generation (Kolm-Westray) and synthetic metaorder reconstruction from public trade data (Maitrier-Loeper-Bouchaud)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "FlowForge contributors" }]
+keywords = ["algorithmic-trading", "market-microstructure", "metaorders", "price-impact", "simulation"]
+dependencies = [
+    "numpy>=1.22",
+    "pandas>=1.4",
+    "scipy>=1.8",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["flowforge"]
